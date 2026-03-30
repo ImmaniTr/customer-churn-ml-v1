@@ -85,7 +85,7 @@ Models were evaluated using:
 ### Final Model
 The selected model was:
 
-👉 **Balanced Random Forest**
+ **Balanced Random Forest**
 
 - Recall (churn): 0.71  
 - Precision (churn): 0.55  
