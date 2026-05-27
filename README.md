@@ -1,25 +1,64 @@
-# Customer Churn Prediction (Telco)
+# Customer Churn Prediction (Telco) - ML Modeling v1
 
-## Project Description
-This project aims to predict customer churn using machine learning techniques on real-world telecommunications data.
+## Project Overview
 
-The approach combines exploratory data analysis (EDA), preprocessing, modeling, and evaluation, with a strong focus on business-oriented decision making.
+This repository represents the first stage of a multi-stage end-to-end Machine Learning project focused on customer churn prediction.
 
-The following supervised models were evaluated:
-- Logistic Regression (baseline and balanced)
-- Random Forest (baseline and balanced)
+The objective of this phase is to:
+- Analyze customer churn behavior
+- Build and evaluate machine learning models
+- Handle class imbalance
+- Select and package a production-ready model
 
-The main objective is to identify customers at risk of leaving in order to support retention strategies.
+The project combines exploratory data analysis (EDA), preprocessing, modeling, evaluation, and business-oriented interpretation using real-world telecommunications data.
+
+---
+
+# Project Ecosystem
+
+This repository is part of a complete Machine Learning deployment workflow.
+
+## Repository Flow
+
+| Stage | Repository | Purpose |
+|---|---|---|
+| 1 | [customer-churn-ml-v1](https://github.com/ImmaniTr/customer-churn-ml-v1) | Data analysis, preprocessing, modeling and evaluation |
+| 2 | [customer-churn-ml-api-v1](https://github.com/ImmaniTr/customer-churn-ml-api-v1) | Local FastAPI implementation for real-time predictions |
+| 3 | [customer-churn-ml-api-aws-v1](https://github.com/ImmaniTr/customer-churn-ml-api-aws-v1) | Initial AWS deployment using Docker and ECS |
+| 4 | [customer-churn-aws-deployment-v1](https://github.com/ImmaniTr/customer-churn-aws-deployment-v1) | Production-oriented deployment with ALB, monitoring and CI/CD |
+
+---
+
+# Project Evolution
+
+This repository represents the modeling and experimentation phase of the project.
+
+The project later evolved into:
+- API serving with FastAPI
+- Docker containerization
+- AWS deployment using ECS Fargate
+- Application Load Balancer integration
+- Monitoring with CloudWatch
+- CI/CD automation with GitHub Actions
 
 ---
 
 ## Dataset
-- Source: Kaggle  
-- Link: https://www.kaggle.com/datasets/blastchar/telco-customer-churn  
-- Name: Telco Customer Churn  
-- Description: Customer data from a telecommunications company, including services, billing, and behavior.
 
-Main variables:
+- Source: Kaggle  
+- Dataset: Telco Customer Churn  
+- Link: https://www.kaggle.com/datasets/blastchar/telco-customer-churn
+
+### Dataset Description
+
+Customer data from a telecommunications company, including:
+- customer behavior
+- billing information
+- service subscriptions
+- churn status
+
+### Main Variables
+
 - `tenure`: Customer tenure  
 - `MonthlyCharges`: Monthly charges  
 - `TotalCharges`: Total accumulated charges  
@@ -33,124 +72,153 @@ Main variables:
 ## Methodology
 
 ### 1. Data Cleaning
-- Data type conversions  
-- Handling missing values  
-- Consistency checks for numerical variables  
+- Data type conversions
+- Missing value handling
+- Numerical consistency validation
 
 ### 2. Exploratory Data Analysis (EDA)
-- Distribution analysis  
-- Outlier detection  
-- Relationship between variables and churn  
-- Categorical analysis vs churn  
+- Distribution analysis
+- Outlier inspection
+- Churn relationship analysis
+- Categorical feature analysis
 
 ### 3. Preprocessing
-- Separation of numerical and categorical features  
-- Scaling using `StandardScaler`  
-- Encoding using `OneHotEncoder`  
-- Use of `ColumnTransformer` and `Pipeline` to prevent data leakage  
+- Numerical and categorical feature separation
+- Scaling using `StandardScaler`
+- Encoding using `OneHotEncoder`
+- Use of `ColumnTransformer` and `Pipeline`
+- Data leakage prevention
 
 ### 4. Modeling
-The following models were trained:
+
+The following models were evaluated:
 
 - Logistic Regression (baseline)
 - Logistic Regression with `class_weight="balanced"`
 - Random Forest (baseline)
 - Random Forest with `class_weight="balanced"`
 
-### 5. Evaluation
-Models were evaluated using:
+### 5. Model Evaluation
 
-- Accuracy  
-- Precision  
-- Recall  
-- F1-score  
-- Confusion matrix  
-- ROC-AUC  
+Models were evaluated using:
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Confusion Matrix
+- ROC-AUC
 
 ---
 
 ## Results
 
 ### Key Findings
-- Customers with lower tenure have a higher probability of churn  
-- Month-to-month contracts show higher churn risk  
-- Customers with higher monthly charges tend to churn more  
-- Class imbalance significantly affects model performance  
+
+- Customers with lower tenure have higher churn probability
+- Month-to-month contracts show elevated churn risk
+- Higher monthly charges correlate with higher churn
+- Class imbalance significantly impacts model behavior
 
 ### Model Performance
-- Logistic Regression baseline shows good accuracy but low recall for churn  
-- Random Forest baseline fails to properly detect churn  
-- Using `class_weight="balanced"` significantly improves detection  
 
-### Final Model
-The selected model was:
+#### Logistic Regression
+- Good overall accuracy
+- Lower recall for churn detection
 
- **Balanced Random Forest**
+#### Random Forest
+- Better non-linear learning capability
+- Baseline version struggled with churn detection
 
-- Recall (churn): 0.71  
-- Precision (churn): 0.55  
-- F1-score: 0.62  
-- Accuracy: 0.77  
+#### Balanced Random Forest (Selected Model)
 
-This model provides the best trade-off between performance metrics.
+Final selected model:
+
+**Balanced Random Forest**
+
+Performance:
+- Recall: 0.71
+- Precision: 0.55
+- F1-score: 0.62
+- Accuracy: 0.77
+
+This model achieved the best balance between churn detection and overall predictive performance.
 
 ---
 
-## Conclusions
-The project shows that:
+## Business Perspective
 
-- Churn is influenced by key variables such as tenure, contract type, and monthly charges  
-- Handling class imbalance is critical  
-- More complex models do not always improve performance without proper adjustments  
+From a business standpoint, customer retention is often less expensive than acquiring new customers.
 
-The final model achieves a balance between precision and detection capability, making it suitable for retention strategies.
+For this reason, the project prioritizes recall performance to better identify customers at risk of leaving the company.
+
+This allows companies to:
+- improve retention strategies
+- reduce customer acquisition costs
+- focus interventions on high-risk customers
 
 ---
 
 ## Limitations
-- No hyperparameter tuning was performed  
-- Advanced models (XGBoost, LightGBM) were not evaluated  
-- No temporal variables were included  
-- Threshold optimization was not implemented as final solution  
-- Dataset size and scope are limited  
+
+- No extensive hyperparameter tuning
+- No advanced boosting models implemented
+- No temporal feature engineering
+- Limited dataset scope
+- Threshold optimization not fully explored
 
 ---
 
-## Next Steps
+## Implemented Extensions
 
-### Version 2 (V2)
-- Implement advanced models (XGBoost, LightGBM)  
-- Perform hyperparameter tuning  
-- Optimize threshold based on business needs  
-- Apply techniques such as SMOTE  
+The project was later expanded through additional repositories that introduced:
 
-### MLOps & Deployment
-- Deploy using AWS (SageMaker / Lambda / API Gateway)  
-- Build real-time inference pipeline  
-- Monitor model performance  
-- Automate retraining  
+- FastAPI serving layer
+- Docker containerization
+- AWS ECS deployment
+- Application Load Balancer
+- CloudWatch monitoring
+- CI/CD automation
+
+See:
+- [customer-churn-ml-api-v1](https://github.com/ImmaniTr/customer-churn-ml-api-v1)
+- [customer-churn-ml-api-aws-v1](https://github.com/ImmaniTr/customer-churn-ml-api-aws-v1)
+- [customer-churn-aws-deployment-v1](https://github.com/ImmaniTr/customer-churn-aws-deployment-v1)
 
 ---
 
 ## Technologies Used
-- Python  
-- Pandas, NumPy  
-- Scikit-learn  
-- Matplotlib, Seaborn  
+
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- Matplotlib
+- Seaborn
 
 ---
 
 ## Author
 
 **Immani Trejo**  
-Data Science | Machine Learning | IT Background  
+Data Science | Machine Learning | Cloud Deployment
 
-Experience in data analysis, applied statistics, machine learning, and cloud-based deployment.
+Background in:
+- IT consulting
+- data analysis
+- machine learning
+- cloud-based deployment
+- end-to-end ML workflows
 
 ---
 
-⭐ **Recruiter Note**
+## Recruiter Note
 
-This project builds a churn prediction model using real-world telecom data, applying best practices such as handling class imbalance, using pipelines, and robust evaluation.
+This repository demonstrates the modeling and experimentation phase of an end-to-end Machine Learning project.
 
-It demonstrates the ability to create business-oriented solutions ready for production environments.
+The project evolved beyond experimentation into:
+- API development
+- cloud deployment
+- monitoring
+- CI/CD automation
+
+showcasing the transition from traditional data science workflows to production-oriented machine learning engineering practices.
